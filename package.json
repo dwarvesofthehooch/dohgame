@@ -1,0 +1,19 @@
+{
+  "name": "doh",
+  "version": "0.0.1",
+  "description": "Dwarves of the Hooch game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "DOH"
+  ],
+  "type": "module",
+  "author": "Sebastian, Piotr",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^4.6.0"
+  }
+}

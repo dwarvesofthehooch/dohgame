@@ -1,0 +1,381 @@
+:root {
+    --menu_elements_shadow: 4px 4px 6px 0px rgb(0 0 0);
+    --menu_shadow : 8px 8px 20px 0px rgb(0 0 0);
+    --game_logo_width: 280px;
+    --game_logo_heigth: 60px;
+    --menu_form_width: 250px;
+    --menu_form_heigth: 440px;
+  }
+
+body{
+    margin: 0;
+    padding: 0;
+}
+#game_logo{
+    width: var(--game_logo_width);
+    height: var(--game_logo_height);
+
+    top: 0;
+    right: calc(50% - (var(--game_logo_width) / 2));
+    position: absolute;
+    z-index: 1;
+
+    background-image: url(./../images/logobg.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+
+    box-shadow: var(--menu_shadow);
+    
+
+}
+#menu_background{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+
+    background-image:  url(./../images/menu_mountain.png), url(./../images/menu_clouds.png), linear-gradient(0deg, rgba(25,93,122,1) 25%, rgba(78,179,212,1) 85%);
+    background-position:  left bottom, center;
+    background-repeat: repeat-x,repeat;
+}
+#regulamin{
+    background: none;
+    border: none;
+    font-weight: 800;
+    font-size: 14px;
+    padding:0;
+    color: orangered;
+}
+#regulamin:hover{
+    color: orangered;
+    text-shadow: 2px 2px 4px maroon;
+    cursor: pointer;
+}
+#menu_form{
+    width: var(--menu_form_width);
+    height: var(--menu_form_heigth);
+    padding-top: 15px;
+    position: absolute;
+    z-index: 1;
+    
+    top: calc(50% - (var(--menu_form_heigth)/2));
+    right: calc(50% - (var(--menu_form_width)/2));
+
+    background-color: rgb(198 194 176);
+    background-image:  url(./../images/frame_top.png), url(./../images/frame_right.png), url(./../images/frame_bottom.png), url(./../images/frame_left.png);
+    background-position:  left top, right top, left bottom, left bottom;
+    background-repeat: repeat-x,repeat-y,repeat-x,repeat-y;
+
+    box-shadow: var(--menu_shadow);
+}
+#menu_form > fieldset{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu_form > fieldset > legend{
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+#menu_form > fieldset > label{
+    display: block;
+    border: none;
+    /*margin-left:15px;*/
+    margin-top: 5px;
+    margin-bottom:5px;
+    padding: 0;
+}
+#menu_form > fieldset > input{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 0;
+    padding-left: 10px;
+    width: 190px;
+    height: 36px;
+
+    background-image: url(./../images/txt_input.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    color: white;
+
+    border: none;
+
+    font-size: 18px;
+}
+
+#menu_form > fieldset > input[type=submit], #menu_form > fieldset > input[type=button]{
+    background-image: url(./../images/btn_off.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    height: 36px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    font-size: 24px;
+    color: white;
+}
+#menu_form > fieldset > input[type=submit]:disabled{
+    background-image: url(./../images/btn_disabled.png) !important;
+    color: #999;
+}
+#menu_form > fieldset > input:hover{
+    
+    box-shadow: var(--menu_elements_shadow);
+}
+
+#menu_form > fieldset > input[type=submit]:hover, #menu_form > fieldset > input[type=button]:hover{
+    background-image: url(./../images/btn_on.png);
+}
+
+
+
+#menu_form > fieldset > p{
+    color: red;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -5px;
+    /*background-color: orange;*/
+    width: 190px;
+    /*border: 1px solid red;*/
+    height: 15px;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+#menu_form > fieldset > label{
+    text-align: center;
+}
+
+/*label.cbLabel , label.rbLabel{
+	width: 90% !important; 
+	text-align: center !important;
+    margin: 0 auto !important;
+    display: block !important;
+    float: none !important;
+}*/
+
+input[type=checkbox]{
+	height: 1px !important;
+	width:1px !important;
+	background: none;
+	visibility: hidden;
+	display: inline;
+   }
+
+   input[type=checkbox]+.cb{
+   display: inline-block;
+	   width: 36px !important;
+	   height: 36px !important;
+	   padding: 0 !important;
+	   vertical-align: middle;
+   
+	   background-image: url(./../images/checkbox_off.png);
+		   	background-size:contain;
+	   /*background-size: cover;
+	   background-color: #fff;
+	   border:thin solid #cbcbcb;*/
+	   cursor: pointer;
+	   
+
+   }
+   input[type=checkbox].formErr+.cb {
+	border:thin solid orangered;
+	animation-name: shadowPulseErr;
+	animation-duration: 1.5s;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+
+  }
+   input[type=checkbox]:checked+.cb {
+	 background-image:url(./../images/checkbox_on.png);
+		   	background-size:contain;
+		   /*	background-color: #00aaee;
+			border:thin solid #0066aa;
+			text-shadow: 1px 1px #0066aa;*/
+	 }
+	
+	input[type=checkbox]:hover + .cb {
+        box-shadow: var(--menu_elements_shadow);
+    }
+	/* 	background-color: #2ecc77 !important;
+		border:thin solid #1fbb66 !important;
+		text-shadow: 1px 1px #1fbb66 !important;
+	 }*/
+#change_menu_form{
+    margin-top: 20px !important;
+}
+#game_footer{
+    position: absolute;
+    bottom:10px;
+    right: 10px;
+    z-index: 1;
+}
+
+
+
+
+/*#menu_div{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(25,93,122);
+    
+    background-image: linear-gradient(0deg, rgba(25,93,122,1) 25%, rgba(78,179,212,1) 85%);
+    background-image:  url(./../images/menu_mountain.png), url(./../images/menu_clouds.png), linear-gradient(0deg, rgba(25,93,122,1) 25%, rgba(78,179,212,1) 85%);
+    background-position:  left bottom, center;
+    background-repeat: repeat-x,repeat;
+}
+h1{
+    height: 90px;
+    z-index: 2;
+    position: absolute;
+    text-align: center;
+    width: 420px;
+    top: 0;
+    left: calc(50% - 210px);
+    margin: 0;
+    background-image: url(./../images/logobg.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    box-shadow: 8px 8px 24px 0px rgb(0 0 0);
+
+}
+h1 > img{
+    display: block;
+    margin: 0 auto;
+    margin-top: 17px;
+}
+#login_form , #register_form{
+    position: absolute;
+    width: 300px;
+    background: #fff;
+    left: calc(50% - 150px);
+    box-shadow: 8px 8px 24px 0px rgb(0 0 0);
+    border: 1px solid;
+}
+#login_form{
+    top: calc(50% - 200px);
+    height: 400px;
+}
+#register_form{
+    top: calc(50% - 230px);
+    height: 460px;
+}
+#login_form > fieldset, #register_form > fieldset{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 300px;
+    height: 400px;
+}
+#login_form > fieldset > legend, #register_form > fieldset > legend{
+    padding: 10px;
+    text-align: center;
+}
+#login_form > fieldset > label, #register_form > fieldset > label{
+    display: block;
+    text-align: center;
+}
+#login_form > fieldset > input, #register_form > fieldset > input{
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+#login_nickname, #login_password, #register_email, #register_nickname, #register_password{
+    background-image: url(./../images/txt_input.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    width: 190px;
+    height: 49px;
+    border: none;
+    color: white;
+    padding-left: 15px;
+    font-size: 18px;
+}
+#loginBtn, #registerBtn, #registerBtn2, #returnToLoginBtn, #menu_option_button_close{
+    background-image: url(./../images/btn_off.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    height: 57px;
+    width: 207px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    font-size: 24px;
+    color: white;
+}
+#loginBtn:hover, #registerBtn:hover, #registerBtn2:hover, #returnToLoginBtn:hover, #menu_option_button_close:hover{
+    background-image: url(./../images/btn_on.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+#menu_option_button_close{
+    margin: 0 auto;
+    display: block;
+}
+.hide_element{
+    display: none;
+}
+.show_element{
+    display: block;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    height: 80px;
+    color: white;
+    text-shadow: 2, 2 black;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: 20px;
+}
+
+#menu_option_button{
+    background-image: url(./../images/btn_off.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    height: 57px;
+    width: 207px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    font-size: 24px;
+    color: white;
+    position: absolute;
+    top:0;
+    left:0;
+
+}
+#menu_option_button:hover{
+    background-image: url(./../images/btn_on.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+#menu_option_shadow{
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+#menu_option_window{
+    position: absolute;
+    z-index: 2;
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    top: calc(50% - 200px);
+    left: calc(50% - 200px);
+}*/
