@@ -21,9 +21,12 @@ io.on("connection", (socket) => {
   socket.on('disconnect', () => {
     console.log('disconnect user: ', socket.id);
   });
-  socket.on('login', (msg) => {
-    console.log(`login: ${msg.login} password: ${msg.password}`);
+  socket.on('login', (data) => {
+    console.log(`LOGOWANIE :: login: ${data.login} password: ${data.password}`);
   });
+  socket.on('register', (data) => {
+    console.log(`REJESTRACJA :: login: ${data.login} password: ${data.password} email: ${data.email}, accepted regulations: ${data.regulations}`);
+  })
 });
 
 
