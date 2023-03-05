@@ -38,7 +38,6 @@ io.on("connection", socket => {
 			// jeżeli nie połączy się z bazą danych to trzeba odesłać do clienta info ala "Usługa chwilowo nie dostępna"
 		});
 		createUser(data);
-		mongoose.con;
 	});
 });
 
@@ -117,8 +116,6 @@ function staticFile(request, response) {
 async function createUser(data) {
 	const userLogin = await User.exists({ login: data.login });
 	const userEmail = await User.exists({ email: data.email });
-	console.log(data.login);
-	console.log(data.email);
 	try {
 		if (userLogin == null && userEmail == null) {
 			const user = await User.create({
@@ -127,7 +124,6 @@ async function createUser(data) {
 				email: data.email,
 				regulations: data.regulations,
 			});
-			console.log(user);
 		} else if (userLogin != null) {
 			console.log("Login exists");
 			//tutaj trzeba wysłać do clienta informację, że login już istnieje
