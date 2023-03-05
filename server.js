@@ -28,6 +28,18 @@ io.on("connection", socket => {
 	});
 	socket.on("login", data => {
 		console.log(`LOGOWANIE :: login: ${data.login} password: ${data.password}`);
+		mongoose.connect(dbUrl).catch(e => {
+			console.log(e);
+			// jeżeli nie połączy się z bazą danych to trzeba odesłać do clienta info ala "Usługa chwilowo nie dostępna"
+		});
+		//zwraca true jeżeli dane do logowania się zgadzają
+		loginUser(data).then(response => {
+			if (response == true) {
+				// TODO wysłać informację o poprawnym zalogowaniu
+			} else {
+				// TODO wysłać informacje o błędnym loginie bądź haśle
+			}
+		});
 	});
 	socket.on("register", data => {
 		console.log(
@@ -37,7 +49,16 @@ io.on("connection", socket => {
 			console.log(e);
 			// jeżeli nie połączy się z bazą danych to trzeba odesłać do clienta info ala "Usługa chwilowo nie dostępna"
 		});
-		createUser(data);
+		createUser(data).then(response => {
+			if (response == true) {
+				// TODO wysłać informację do clienta o udanej rejestracji konta
+				console.log(response);
+			} else if (response == data.login) {
+				// TODO wysłać informację do clienta, że login już istnieje
+			} else if (response == data.email) {
+				// TODO wysłać informację do clienta, że email już istnieje
+			}
+		});
 	});
 });
 
@@ -118,20 +139,33 @@ async function createUser(data) {
 	const userEmail = await User.exists({ email: data.email });
 	try {
 		if (userLogin == null && userEmail == null) {
-			const user = await User.create({
+			await User.create({
 				login: data.login,
 				password: data.password,
 				email: data.email,
 				regulations: data.regulations,
 			});
+			return true;
 		} else if (userLogin != null) {
-			console.log("Login exists");
-			//tutaj trzeba wysłać do clienta informację, że login już istnieje
+			return data.login;
 		} else {
-			console.log("Email exists");
-			//tutaj trzeba wysłać do clienta informację, że login już istnieje
+			return data.email;
 		}
 	} catch (e) {
 		console.log(e);
+	}
+}
+
+async function loginUser(data) {
+	const user = await User.findOne({ login: data.login });
+	if (
+		user != null &&
+		user.login == data.login &&
+		user.password == data.password
+	) {
+		console.log(`User ${data.login} login`);
+		return true;
+	} else {
+		return false;
 	}
 }
